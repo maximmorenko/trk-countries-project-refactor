@@ -4,7 +4,7 @@ import {useEffect} from 'react'
 
 import { List } from '../components/List';
 import { Card } from '../components/Card';
-import { Controls } from '../components/Controls';
+import { Controls } from '../features/controls/Controls';
 import { selectVisibleCountries, selectCountriesInfo } from '../store/countries/countries-selectors';
 import { loadCountries } from '../store/countries/countries-actions';
 import {selectControls} from '../store/controls/controls-selectors'
