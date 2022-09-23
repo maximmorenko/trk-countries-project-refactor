@@ -1,4 +1,4 @@
-## [рефакторинг Countries-project с использованием RTK DEMO]((https://trk-countries-project-refactor.vercel.app/)
+## [рефакторинг Countries-project с использованием RTK DEMO](https://trk-countries-project-refactor.vercel.app/)
 
 Небольшой сервис со списком стран c поиском и фильтрацией. Также есть возможность выбора темы (светлой или темной).
 ## [countries-project ТЗ](https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca)
