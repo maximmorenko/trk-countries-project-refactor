@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 
-import {store} from './store.js'// меняем путь на новый стор
+import {store} from './store';
 
 
 ReactDOM.render(

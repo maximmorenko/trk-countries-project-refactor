@@ -2,12 +2,22 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 
 export const loadCountryByName = createAsyncThunk(
-    'details/load-country-by-name',
+    '@@details/load-country-by-name',
     (name, {
         // из UI ждем название страны, и достаем из екстра аксиос под именем клиент и апи
         extra: {client, api},
     }) => {
         return client.get(api.searchByCountry);
+    }
+);
+
+export const loadNeighborsByBorder = createAsyncThunk(
+    '@@details/load-neighbors',
+    (borders, {
+        // из UI ждем бордеры, и достаем из екстра аксиос под именем клиент и апи
+        extra: {client, api},
+    }) => {
+        return client.get(api.filterByCode(borders));
     }
 );
 
@@ -39,6 +49,10 @@ const detailsSlice = createSlice({
                 state.status = 'received';
                 state.list = action.payload.data[0]; 
                 // так как работаем с axios то в пейлоаде обращаемся к первому элементу дата за данными
+            })
+            .addCase(loadNeighborsByBorder.fulfilled, (state, action) => {
+                state.neighbors = action.payload.data.map(country => country.name)
+                // так как там приходит массив стран в виде объекта, а нам нужны только названия, то обработаем их мапом
             })
     },
 
