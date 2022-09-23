@@ -1,24 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-
 export const loadCountryByName = createAsyncThunk(
     '@@details/load-country-by-name',
-    (name, {
-        // из UI ждем название страны, и достаем из екстра аксиос под именем клиент и апи
-        extra: {client, api},
-    }) => {
-        return client.get(api.searchByCountry);
+    (name, {extra: {client, api}}) => {
+      return client.get(api.searchByCountry(name));
     }
+    // из UI ждем название страны, и достаем из екстра аксиос под именем клиент и апи
 );
 
 export const loadNeighborsByBorder = createAsyncThunk(
     '@@details/load-neighbors',
-    (borders, {
-        // из UI ждем бордеры, и достаем из екстра аксиос под именем клиент и апи
-        extra: {client, api},
-    }) => {
+    (borders, {extra: {client, api}}) => {
         return client.get(api.filterByCode(borders));
     }
+    // из UI ждем бордеры, и достаем из екстра аксиос под именем клиент и апи
 );
 
 const initialState = {
@@ -41,13 +36,15 @@ const detailsSlice = createSlice({
                 state.status = 'loading';
                 state.error = null;
             })
+            
             .addCase(loadCountryByName.rejected, (state, action) => {
                 state.status = 'rejected';
-                state.error = action.payload || action.meta.error; // если в пейлоаде пусто то берем из мета
+                state.error = action.payload || action.meta.error;
+                // если в пейлоаде пусто то берем из мета
             })
             .addCase(loadCountryByName.fulfilled, (state, action) => {
-                state.status = 'received';
-                state.list = action.payload.data[0]; 
+                state.status = 'idle';
+                state.currentCountry = action.payload.data[0]; 
                 // так как работаем с axios то в пейлоаде обращаемся к первому элементу дата за данными
             })
             .addCase(loadNeighborsByBorder.fulfilled, (state, action) => {

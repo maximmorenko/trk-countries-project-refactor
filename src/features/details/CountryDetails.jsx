@@ -1,9 +1,9 @@
 import { Info } from './Info';
 import { useDetails } from './use-details';
 
-export const CountryDetails = ({name = '', navigate}) => {
 
-    const {currentCountry, error, status} = useDetails(name)
+const CountryDetails = ({name = '', navigate}) => {
+    const {status, error, currentCountry} = useDetails(name);
 
     return (
         <>
@@ -13,3 +13,5 @@ export const CountryDetails = ({name = '', navigate}) => {
         </>
     )
 }
+
+export {CountryDetails};

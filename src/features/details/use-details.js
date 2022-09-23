@@ -6,7 +6,7 @@ import { clearDetails, loadCountryByName, selectDetails } from './details-slice'
 export const useDetails = (name) => {
 
     const dispatch = useDispatch();
-    const {currentCountry, error, status} = useSelector(selectDetails);
+    const details = useSelector(selectDetails);
 
     useEffect(() => {
         dispatch(loadCountryByName(name));
@@ -17,5 +17,5 @@ export const useDetails = (name) => {
     }, [name, dispatch]);
 
 
-    return {currentCountry, error, status};
+    return details;
 }
